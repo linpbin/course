@@ -23,7 +23,7 @@
 
                 <li id="fat-menu" class="dropdown">
                     <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-user"></i> Jack Smith
+                        <i class="icon-user"></i> Jack Smith <span id="name"></span>
                         <i class="icon-caret-down"></i>
                     </a>
 
@@ -62,13 +62,22 @@
             </div>
         </div>
         <div class="span9"></div>
+        <div id="table">
+
+        </div>
+
     </div>
     <!-- end -->
     <script>
         $(function () {
+
+            var studentname = sessionStorage.getItem("student");
+            studentname = JSON.parse(studentname);
+//            console.log(studentname);
+            $("#name").html(studentname.studentName);
             var $notice = $("#notice");
             $notice.bind("click",function () {
-                var studentname = sessionStorage.getItem("student");
+
                 $.ajax({
                     type : "get",
                     url : "/stuAnnouncement",
@@ -76,6 +85,20 @@
                     success:function (commResult) {
                         console.log("成功");
                         console.log(commResult)
+                        let studebtList = commResult.data;
+                        var list = '';
+                        list+= `  <table><tbody><tr>`
+                        for(var i=0;i<studebtList.length;i++){
+                            list+=`
+
+                              <td >
+                                 ${studebtList[i].context}
+                              </td>
+                        `
+                        }
+                        list+=`</tr></tbody></table>`
+                        $("#table").html(list);
+
                     },
                     error:function (commResult) {
 
