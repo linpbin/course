@@ -45,4 +45,14 @@ public class Notice {
     public void setCourseId(Course courseId) {
         this.courseId = courseId;
     }
+
+    @Override
+    public String toString() {
+        return "Notice{" +
+                "id=" + id +
+                ", context='" + context + '\'' +
+                ", createTime=" + createTime +
+                ", courseId=" + courseId +
+                '}';
+    }
 }

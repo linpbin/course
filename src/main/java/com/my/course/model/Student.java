@@ -86,4 +86,18 @@ public class Student {
     public void setStudentEnrollmentyear(String studentEnrollmentyear) {
         this.studentEnrollmentyear = studentEnrollmentyear;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", studentName='" + studentName + '\'' +
+                ", studentFaculty='" + studentFaculty + '\'' +
+                ", studentProfession='" + studentProfession + '\'' +
+                ", studentPassword='" + studentPassword + '\'' +
+                ", sex='" + sex + '\'' +
+                ", studentEnrollmentyear='" + studentEnrollmentyear + '\'' +
+                ", clazz=" + clazz +
+                '}';
+    }
 }

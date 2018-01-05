@@ -31,4 +31,13 @@ public class Login {
     public void setLogintype(String logintype) {
         this.logintype = logintype;
     }
+
+    @Override
+    public String toString() {
+        return "Login{" +
+                "username=" + username +
+                ", password='" + password + '\'' +
+                ", logintype='" + logintype + '\'' +
+                '}';
+    }
 }

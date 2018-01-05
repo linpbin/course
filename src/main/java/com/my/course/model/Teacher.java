@@ -70,4 +70,17 @@ public class Teacher {
     public void setTeacherPassword(String teacherPassword) {
         this.teacherPassword = teacherPassword;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", teacherName='" + teacherName + '\'' +
+                ", teacherEmail='" + teacherEmail + '\'' +
+                ", teacherPhone='" + teacherPhone + '\'' +
+                ", teacherWorkingplace='" + teacherWorkingplace + '\'' +
+                ", teacherWorkingtime='" + teacherWorkingtime + '\'' +
+                ", teacherPassword='" + teacherPassword + '\'' +
+                '}';
+    }
 }

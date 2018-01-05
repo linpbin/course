@@ -25,4 +25,12 @@ public class Administrators {
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
     }
+
+    @Override
+    public String toString() {
+        return "Administrators{" +
+                "id=" + id +
+                ", adminPassword='" + adminPassword + '\'' +
+                '}';
+    }
 }

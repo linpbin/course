@@ -30,11 +30,12 @@ public class LoginServiceImpl implements LoginService {
             Student student =loginDao.studentLogin(login.getUsername(),login.getPassword());
             if (student!=null){
                 commResult.setData(student);
-
+                commResult.setResultMsg("success");
                 commResult.setResultCode(0);
             }else {
                 commResult.setResultCode(1);
                 commResult.setResultMsg("用户名或密码错误");
+                commResult.setData(null);
             }
         }else if(login.getLogintype().equals("Teacher")){
             LOGGER.info("teacher login {}"+login.getLogintype());
@@ -42,13 +43,16 @@ public class LoginServiceImpl implements LoginService {
             if (teacher!=null){
                 commResult.setData(teacher);
                 commResult.setResultCode(0);
+                commResult.setResultMsg("success");
             }else {
                 commResult.setResultCode(1);
                 commResult.setResultMsg("用户名或密码错误");
+                commResult.setData(null);
             }
         }else {
             commResult.setResultCode(1);
             commResult.setResultMsg("未知错误");
+            commResult.setData(null);
         }
         return commResult;
     }

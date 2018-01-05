@@ -71,4 +71,17 @@ public class Clazz {
     public void setClazzNumber(String clazzNumber) {
         this.clazzNumber = clazzNumber;
     }
+
+    @Override
+    public String toString() {
+        return "Clazz{" +
+                "id=" + id +
+                ", clazzName='" + clazzName + '\'' +
+                ", clazzFaculty='" + clazzFaculty + '\'' +
+                ", clazzProfession='" + clazzProfession + '\'' +
+                ", clazzNumber='" + clazzNumber + '\'' +
+                ", courseList=" + courseList +
+                ", studentList=" + studentList +
+                '}';
+    }
 }

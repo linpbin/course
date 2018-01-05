@@ -11,6 +11,18 @@ public class Announcement {
     private Integer isTeacher; //是否发给老师
     private String context;
     private Date createTime;
+    /*
+    * 用于将createTime字段转化为字符串，方便前端显示
+    */
+    private String stringTime;
+
+    public String getStringTime() {
+        return stringTime;
+    }
+
+    public void setStringTime(String stringTime) {
+        this.stringTime = stringTime;
+    }
 
     public Announcement() {
     }
