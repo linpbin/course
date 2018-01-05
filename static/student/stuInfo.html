@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>Student Infocation</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../css/theme.css">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/topbar.css" rel="stylesheet">
+    <script src="../bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../js/stuNav.js"></script>
+    <style type="text/css">
+    #line-chart {
+        height:300px;
+        width:800px;
+        margin: 0px auto;
+        margin-top: 1em;
+    }
+    .brand { font-family: georgia, serif; }
+    .brand .first {
+        color: #ccc;
+        font-style: italic;
+    }
+    .brand .second {
+        color: #fff;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
+    <!-- top bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav pull-right">
+
+                    <li id="fat-menu" class="dropdown">
+                        <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-user"></i><span id="name"></span>
+                            <i class="icon-caret-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="#">Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a tabindex="-1" href="#">Logout</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <a class="brand" href="#"><span class="first">Your</span> <span class="second">Company</span></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <!-- left bar -->
+        <div class="row-fluid">
+            <div class="span3">
+                <div class="sidebar-nav">
+                 <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu0"><i class="icon-dashboard"></i>主页</div>
+                 <ul id="dashboard-menu0" class="nav nav-list collapse in">
+                    <li><a href="javascript:void(0)" id="main">主页</a></li>
+
+                </ul>
+                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu1"><i class="icon-dashboard"></i>公告</div>
+                <ul id="dashboard-menu1" class="nav nav-list collapse in">
+                    <li><a href="javascript:void(0)" id="notice">公告</a></li>
+
+                </ul>
+                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu2"><i class="icon-dashboard"></i>我的课程</div>
+                <ul id="dashboard-menu2" class="nav nav-list collapse in">
+                    <li ><a href="javascript:void(0)" id="course">课程列表</a></li>
+                </ul>
+                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu3"><i class="icon-dashboard"></i>个人信息</div>
+                <ul id="dashboard-menu3" class="nav nav-list collapse in">
+                    <li><a href="javascript:void(0)" id="info">基本信息</a></li>
+                    <li ><a href="javascript:void(0)" id="modify">密码修改</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="span9">
+            <!-- info -->
+            <div class="row-fluid">
+              <div class="block span6">
+                <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">基本信息</div>
+                <div id="tablewidget" class="block-body collapse in"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- end -->
+<script>
+    $(function () {
+        var studentname = sessionStorage.getItem("student");
+        studentname = JSON.parse(studentname);
+        $("#name").html(studentname.studentName);
+        var studnetInfoList =sessionStorage.getItem("studnetInfo");
+        studnetInfoList=JSON.parse(studnetInfoList);
+        console.log(studnetInfoList);
+        if (studnetInfoList.resultCode==0) {
+           let studnetInfoLists = studnetInfoList.data;
+           var list = '';
+           list+= `<table class="table"><tbody><thead>`
+            list+=`<tr>
+            <th>基本信息</th>
+            </tr>
+            <tr>
+            <td>学号</td>
+            <td>${studnetInfoLists.id}</td>
+            </tr>
+            <tr>
+            <td>姓名</td>
+            <td>${studnetInfoLists.studentName}</td>
+            </tr>
+            <tr>
+            <td>系别</td>
+            <td>${studnetInfoLists.studentFaculty}</td>
+            </tr>
+            <tr>
+            <td>专业</td>
+            <td>${studnetInfoLists.studentProfession}</td>
+            </tr>
+            <tr>
+            <td>性别</td>
+            <td>${studnetInfoLists.sex}</td>
+            </tr>
+            <tr>
+            <td>入学年份</td>
+            <td>${studnetInfoLists.studentEnrollmentyear}</td>
+            </tr>
+            <tr>
+            <td>班级</td>
+            <td>${studnetInfoLists.clazz.id}</td>
+            </tr>
+            <tr>
+            <td>班级名称</td>
+            <td>${studnetInfoLists.clazz.clazzName}</td>
+            </tr>`
+            list+=`</thead></tbody></table>`
+            $("#tablewidget").html(list);
+        }else{
+            let studnetInfoLists = studnetInfoList.resultMsg;
+           var list = '';
+           list+= `  <table class="table"><tbody>
+           `
+            list+=`
+            <tr>
+            <td >
+            ${studnetInfoLists}
+            </td>
+        
+            </tr>
+            `
+            list+=`</tbody></table>`
+            $("#tablewidget").html(list);
+        }
+
+})
+
+</script>
+</div>
+</body>
+</html>
