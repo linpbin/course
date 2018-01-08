@@ -156,3 +156,7 @@ $(function(){
        $("#stucourse").html(list);
    }
    })
+ function showcourse(courseid){
+      sessionStorage.setItem("courseid",JSON.stringify(courseid));
+      window.location.href="stuCourse/stuCourseHome.html"
+   }

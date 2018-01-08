@@ -56,5 +56,5 @@ $(function () {
 })
  function showcourse(courseid){
       sessionStorage.setItem("courseid",JSON.stringify(courseid));
-      window.location.href="../course/courseHome.html"
+      window.location.href="stuCourse/stuCourseHome.html"
    }
