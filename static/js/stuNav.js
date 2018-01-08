@@ -76,7 +76,11 @@
                     }
                 })
             })
-
+var $layout=$("#layout");
+    $layout.bind("click",function(){
+        sessionStorage.clear();
+        window.location.href="../main.html"
+    })
 
         })
 
