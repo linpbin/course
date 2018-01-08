@@ -13,12 +13,12 @@
 
                 $.ajax({
                     type : "get",
-                    url : "http://localhost:8081/stuAnnouncement",
+                    url : "http://localhost:8081/stuAllAnnouncement",
                     dataType:"json",
                     success:function (commResult) {
                         var announcementList = commResult;
                         announcementList = JSON.stringify(announcementList);
-                        sessionStorage.setItem("announcementList",announcementList);
+                        sessionStorage.setItem("allannouncementList",announcementList);
                         window.location.href='stuAnnouncement.html';  
                     },
                     error:function (commResult) {
@@ -30,11 +30,10 @@
             var student = sessionStorage.getItem("student");
             student = JSON.parse(student);
             var userId = student.id;
-            console.log(userId);
             $info.bind("click",function(){
                 $.ajax({
                     type :"post",
-                    url:"http://localhost:8081/studnetInfo",
+                    url:"http://localhost:8081/studentInfo",
                     data: JSON.stringify(userId),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
@@ -59,7 +58,6 @@
             var student = sessionStorage.getItem("student");
             student = JSON.parse(student);
             var userId = student.id;
-            console.log(userId);
             $course.bind("click",function(){
                 $.ajax({
                     type :"post",
@@ -68,8 +66,6 @@
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
                     success:function(commResult){
-                        console.log("success");
-                        console.log(commResult);
                         var courseList =commResult;
                         courseList=JSON.stringify(courseList);
                         sessionStorage.setItem("courseList",courseList);

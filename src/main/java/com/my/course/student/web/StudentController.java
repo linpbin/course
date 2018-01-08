@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
     @Autowired
     private StudentService studentService;
-    @PostMapping("/studnetInfo")
+    @PostMapping("/studentInfo")
     public CommResult studentInfo(@RequestBody String id){
         CommResult<Student> commResult = new CommResult<>();
         commResult=studentService.studentInfo(id);

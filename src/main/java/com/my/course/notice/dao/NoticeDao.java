@@ -15,4 +15,7 @@ public interface NoticeDao {
     //查询通知学生的公告
     @Select("select context,create_time from announcement where is_student=1 order by create_time desc limit 5")
     List<Announcement> selectAnnouncementForStudent();
+    //查询所有通知学生的公告
+    @Select("select context,create_time from announcement where is_student=1 order by create_time")
+    List<Announcement> selectAllAnnouncementForStudent();
 }

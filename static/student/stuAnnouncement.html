@@ -11,26 +11,12 @@
     <link rel="stylesheet" href="../css/theme.css">
     <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/topbar.css" rel="stylesheet">
+    <link href="../css/student/stubody.css" rel="stylesheet">
     <script src="../bootstrap/js/jquery-3.2.1.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/stuNav.js"></script>
-    <style type="text/css">
-    #line-chart {
-        height:300px;
-        width:800px;
-        margin: 0px auto;
-        margin-top: 1em;
-    }
-    .brand { font-family: georgia, serif; }
-    .brand .first {
-        color: #ccc;
-        font-style: italic;
-    }
-    .brand .second {
-        color: #fff;
-        font-weight: bold;
-    }
-</style>
+    <script src="../js/student/stunotice.js"></script>
+    
 </head>
 <body>
     <!-- top bar -->
@@ -62,91 +48,43 @@
         <!-- left bar -->
         <div class="row-fluid">
             <div class="span3">
-                <div class="sidebar-nav">
-                 <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu0"><i class="icon-dashboard"></i>主页</div>
-                 <ul id="dashboard-menu0" class="nav nav-list collapse in">
-                    <li><a href="javascript:void(0)" id="main">主页</a></li>
-
-                </ul>
-                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu1"><i class="icon-dashboard"></i>公告</div>
-                <ul id="dashboard-menu1" class="nav nav-list collapse in">
-                    <li><a href="javascript:void(0)" id="notice">公告</a></li>
-
-                </ul>
-                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu2"><i class="icon-dashboard"></i>我的课程</div>
-                <ul id="dashboard-menu2" class="nav nav-list collapse in">
-                    <li ><a href="javascript:void(0)" id="course">课程列表</a></li>
-                </ul>
-                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu3"><i class="icon-dashboard"></i>个人信息</div>
-                <ul id="dashboard-menu3" class="nav nav-list collapse in">
-                    <li><a href="javascript:void(0)" id="info">基本信息</a></li>
-                    <li ><a href="javascript:void(0)" id="modify">密码修改</a></li>
-                </ul>
+            <div class="sidebar-nav">
+               <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu0"><i class="glyphicon glyphicon-home"></i> 主页
+               </div>
+               <ul id="dashboard-menu0" class="nav nav-list collapse in">
+                <li><a href="javascript:void(0)" id="main">主页</a></li>
+               </ul>
+               <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu1"><i class="glyphicon glyphicon-bullhorn"></i>公告
+               </div>
+               <ul id="dashboard-menu1" class="nav nav-list collapse in">
+                <li><a href="javascript:void(0)" id="notice">所有公告</a></li>
+               </ul>
+               <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu2"><i class="glyphicon glyphicon-book"></i>我的课程
+               </div>
+               <ul id="dashboard-menu2" class="nav nav-list collapse in">
+                <li ><a href="javascript:void(0)" id="course">课程列表</a></li>
+               </ul>
+               <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu3"><i class="glyphicon glyphicon-user"></i>个人信息
+               </div>
+               <ul id="dashboard-menu3" class="nav nav-list collapse in">
+                <li><a href="javascript:void(0)" id="info">基本信息</a></li>
+                <li ><a href="javascript:void(0)" id="modify">密码修改</a></li>
+               </ul>
             </div>
         </div>
         <div class="span9">
             <!-- notice -->
             <div class="row-fluid">
-              <div class="block span6">
-                <div class="block-heading" data-toggle="collapse" data-target="#tablewidget">Notice</div>
-                <div id="tablewidget" class="block-body collapse in"></div>
+              <div class="block">
+                <div class="block-heading" data-toggle="collapse" data-target="#stunotice"><i class="glyphicon glyphicon-bullhorn"></i>公告</div>
+                <div id="stunotice" class="block-body collapse in"></div>
             </div>
         </div>
 
     </div>
 </div>
 <!-- end -->
-<script>
-    $(function () {
-        var studentname = sessionStorage.getItem("student");
-        studentname = JSON.parse(studentname);
-        $("#name").html(studentname.studentName);
-        var announcementList =sessionStorage.getItem("announcementList");
-        announcementList=JSON.parse(announcementList);
-        if (announcementList.resultCode==0) {
-           let announcementLists = announcementList.data;
-           var list = '';
-           list+= `  <table class="table"><tbody><thead>
-           <tr>
-           <th>time</th>
-           <th>context</th>
-           </tr>`
-           for(var i=0;i<announcementLists.length;i++){
-            list+=`
-            <tr>
-            <td >
-            ${announcementLists[i].stringTime}
-            </td>
-            <td >
-            ${announcementLists[i].context}
-            </td>
-            </tr>
-            `
-            }
-            list+=`</thead></tbody></table>`
-            $("#tablewidget").html(list);
-        }else{
-            let announcementLists = announcementList.resultMsg;
-           var list = '';
-           list+= `  <table class="table"><tbody>
-           `
-           
-            list+=`
-            <tr>
-            <td >
-            ${announcementLists}
-            </td>
-        
-            </tr>
-            `
-            
-            list+=`</tbody></table>`
-            $("#tablewidget").html(list);
-        }
 
-})
-
-</script>
 </div>
 </body>
 </html>

@@ -1,14 +1,12 @@
 package com.my.course.notice.web;
 
+import com.github.pagehelper.PageInfo;
 import com.my.course.model.Announcement;
 import com.my.course.model.CommResult;
 import com.my.course.model.Notice;
 import com.my.course.notice.service.NoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,18 @@ public class NoticeController {
     public CommResult<List<Announcement>> stuNotice(){
         CommResult<List<Announcement>> commResult = new CommResult<>();
         commResult=noticeService.selectAnnouncementForStudent();
+        return commResult;
+    }
+    @GetMapping("/stuAllAnnouncement")
+    public CommResult<PageInfo<Announcement>> stuAllNoticeOfGet(){
+        CommResult<PageInfo<Announcement>> commResult = new CommResult<>();
+        commResult=noticeService.selectAllAnnouncementForStudent();
+        return commResult;
+    }
+    @PostMapping("/stuAllAnnouncement")
+    public CommResult<PageInfo<Announcement>> stuAllNoticeOfPost(@RequestBody String pageParams){
+        CommResult<PageInfo<Announcement>> commResult = new CommResult<>();
+        commResult=noticeService.selectAllAnnouncementForStudent(pageParams);
         return commResult;
     }
 }
