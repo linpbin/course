@@ -20,12 +20,14 @@
                        var studentinfo = commResult.data;
                        studentinfo = JSON.stringify(studentinfo);
                        sessionStorage.setItem("student",studentinfo);
-                      window.location.href='student/stuMain.html'
+                      window.location.href="student/stuMain.html";
                    }else if (commResult.resultCode == 0 && logintype=="Teacher"){
                         var teacherinfo=commResult.data;
                         teacherinfo=JSON.stringify(teacherinfo);
                        sessionStorage.setItem("teacher",teacherinfo);
                        window.location.href="teacher/teaMain.html";
+                   }else if (commResult.resultCode == 1){
+                       alert(commResult.resultMsg);
                    }
                 },
                 error:function (commResult) {
