@@ -11,7 +11,6 @@ $(function () {
          <tr>
          <th>课程编号</th>
          <th>课程名称</th>
-         <th>课程介绍</th>
          <th>任课老师</th>
          </tr>`
          for(var i=0;i<courseLists.length;i++){
@@ -22,10 +21,7 @@ $(function () {
             </td>
             <td >
             ${courseLists[i].courseName}
-            </td>
-            <td >
-            ${courseLists[i].courseDescribe}
-            </td>
+            </td>          
             <td >
             ${courseLists[i].teacherId.teacherName}
             </td>

@@ -2,6 +2,7 @@ package com.my.course.student.web;
 
 import com.my.course.model.CommResult;
 import com.my.course.model.Student;
+import com.my.course.model.Teacher;
 import com.my.course.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

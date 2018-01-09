@@ -10,6 +10,18 @@ public class Notice {
     private String context;
     private Date createTime;
     private Course courseId;
+    /*
+       * 用于将createTime字段转化为字符串，方便前端显示
+       */
+    private String stringTime;
+
+    public String getStringTime() {
+        return stringTime;
+    }
+
+    public void setStringTime(String stringTime) {
+        this.stringTime = stringTime;
+    }
 
     public Notice() {
     }

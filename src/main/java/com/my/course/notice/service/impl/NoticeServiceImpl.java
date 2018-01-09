@@ -109,4 +109,60 @@ public class NoticeServiceImpl implements NoticeService {
         }
         return commResult;
     }
+    @Override
+    public CommResult<PageInfo<Notice>> selectAllCourseNotice(String pageparam) {
+        LOGGER.info("start select course notice for student{}");
+        PageDTO pageDTO = JacksonUtil.readValue(pageparam, PageDTO.class);
+        if (pageDTO.getPageSize() == null) {
+            pageDTO.setPageSize(5);
+        }
+        LOGGER.info("pageDto{}" + pageDTO.getPageNo() + " " + pageDTO.getPageSize());
+        CommResult<PageInfo<Notice>> commResult = new CommResult<>();
+        PageHelper.startPage(pageDTO.getPageNo(), pageDTO.getPageSize());
+        List<Notice> noticeList = noticeDao.selectAllCourseNotice(pageDTO.getCourseId());
+        PageInfo<Notice> pageInfo = new PageInfo<>(noticeList);
+        LOGGER.info("{}"+pageInfo);
+        if (noticeList.size() > 0 && noticeList != null) {
+            commResult.setData(pageInfo);
+            commResult.setResultCode(0);
+            commResult.setResultMsg("success");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for (int i = 0; i < noticeList.size(); i++) {
+                String stringTime = format.format(noticeList.get(i).getCreateTime());
+                noticeList.get(i).setStringTime(stringTime);
+            }
+
+        } else {
+            commResult.setResultCode(1);
+            commResult.setResultMsg("暂无通知!");
+            commResult.setData(null);
+        }
+        return commResult;
+    }
+
+    @Override
+    public CommResult<PageInfo<Announcement>> selectAllAnnouncementForTeacher() {
+        LOGGER.info("start select all announcement for teacher{}");
+        CommResult<PageInfo<Announcement>> commResult = new CommResult<>();
+        PageHelper.startPage(1,5);
+        List<Announcement> announcementList =noticeDao.selectAllAnnouncementForTeacher();
+        PageInfo<Announcement> page = new PageInfo<>(announcementList);
+        LOGGER.info("select announcement for tea result"+page);
+        if (page.getList()!=null && page.getList().size()>0){
+            commResult.setData(page);
+            commResult.setResultCode(0);
+            commResult.setResultMsg("success");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for (int i=0;i<announcementList.size();i++){
+                String stringTime =format.format(announcementList.get(i).getCreateTime());
+                announcementList.get(i).setStringTime(stringTime);
+            }
+
+        }else {
+            commResult.setResultCode(1);
+            commResult.setResultMsg("暂无公告!");
+            commResult.setData(null);
+        }
+        return commResult;
+    }
 }

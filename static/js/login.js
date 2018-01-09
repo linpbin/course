@@ -22,8 +22,10 @@
                        sessionStorage.setItem("student",studentinfo);
                       window.location.href='student/stuMain.html'
                    }else if (commResult.resultCode == 0 && logintype=="Teacher"){
-                       sessionStorage.setItem("teacher",commResult.data);
-                       window.location.href="http://localhost:8081/teacher/teaMain.html";
+                        var teacherinfo=commResult.data;
+                        teacherinfo=JSON.stringify(teacherinfo);
+                       sessionStorage.setItem("teacher",teacherinfo);
+                       window.location.href="teacher/teaMain.html";
                    }
                 },
                 error:function (commResult) {

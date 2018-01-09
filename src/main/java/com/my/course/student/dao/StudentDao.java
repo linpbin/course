@@ -5,8 +5,6 @@ import com.my.course.model.Course;
 import com.my.course.model.Student;
 import com.my.course.model.Teacher;
 import org.apache.ibatis.annotations.*;
-import org.apache.ibatis.mapping.FetchType;
-
 import java.util.List;
 
 /**

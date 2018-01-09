@@ -17,4 +17,8 @@ public interface NoticeService {
     CommResult<PageInfo<Announcement>> selectAllAnnouncementForStudent();
     //分页查询所有公告
     CommResult<PageInfo<Announcement>> selectAllAnnouncementForStudent(String pageParams);
+    //分页查询课程发给学生的通知
+    CommResult<PageInfo<Notice>> selectAllCourseNotice(String pageparam);
+
+    CommResult<PageInfo<Announcement>> selectAllAnnouncementForTeacher();
 }

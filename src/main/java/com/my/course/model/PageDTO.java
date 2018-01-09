@@ -6,6 +6,15 @@ package com.my.course.model;
 public class PageDTO {
     private Integer pageNo;
     private Integer pageSize;
+    private Integer courseId;
+
+    public Integer getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Integer courseId) {
+        this.courseId = courseId;
+    }
 
     public Integer getPageNo() {
         return pageNo;
