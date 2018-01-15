@@ -11,7 +11,6 @@ $(function () {
          <tr>
          <th>课程编号</th>
          <th>课程名称</th>
-         <th>任课老师</th>
          </tr>`
          for(var i=0;i<courseLists.length;i++){
             list+=`
@@ -22,15 +21,12 @@ $(function () {
             <td >
             ${courseLists[i].courseName}
             </td>          
-            <td >
-            ${courseLists[i].teacherId.teacherName}
-            </td>
             <td><a href="javascript:void(0)" onclick="showcourse(${courseLists[i].id})">查看详情</a></td>
             </tr>
             `
         }
         list+=`</thead></tbody></table>`
-        $("#stucourse").html(list);
+        $("#teacourse").html(list);
     }else{
        let courseLists = courseList.resultMsg;
        var list = '';
@@ -47,10 +43,10 @@ $(function () {
        `
        
        list+=`</tbody></table>`
-       $("#stucourse").html(list);
+       $("#teacourse").html(list);
    }
 })
  function showcourse(courseid){
       sessionStorage.setItem("courseid",JSON.stringify(courseid));
-      window.location.href="stuCourse/stuCourseHome.html"
-   }
+      window.location.href="teaCourse/teaCourseHome.html"
+}

@@ -24,4 +24,6 @@ public interface NoticeDao {
     List<Notice> selectAllCourseNotice(@Param("courseId") Integer id);
     @Select("select context,create_time from announcement where is_teacher=1 order by create_time")
     List<Announcement> selectAllAnnouncementForTeacher();
+    @Select("select context,create_time from announcement where is_teacher=1 order by create_time desc limit 5")
+    List<Announcement> selectAnnouncementForTeacher();
 }

@@ -52,7 +52,7 @@
 
             $("#modify").click(function(){
                window.location.href='stuModifyPw.html';
-           })
+            })
             //my course
             var $course =$("#course");
             var student = sessionStorage.getItem("student");
@@ -61,7 +61,7 @@
             $course.bind("click",function(){
                 $.ajax({
                     type :"post",
-                    url:"http://localhost:8081/showCourseList",
+                    url:"http://localhost:8081/showStuCourseList",
                     data: JSON.stringify(userId),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",

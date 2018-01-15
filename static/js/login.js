@@ -49,6 +49,20 @@
                        
                     }
                 });
+               $.ajax({
+                    type : "get",
+                    url : "http://localhost:8081/teaAnnouncement",
+                    dataType:"json",
+                    success:function (commResult) {
+                        var announcementList = commResult;
+                        announcementList = JSON.stringify(announcementList);
+                        sessionStorage.setItem("announcementList",announcementList);
+          
+                    },
+                    error:function (commResult) {
+                       
+                    }
+                });
             $.ajax({
                     type :"post",
                     url:"http://localhost:8081/studentInfo",
@@ -66,9 +80,27 @@
                     }
                      
                 })
-             $.ajax({
+              $.ajax({
                     type :"post",
-                    url:"http://localhost:8081/showCourseListOfStudent",
+                    url:"http://localhost:8081/teacherInfo",
+                    data: JSON.stringify(username),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){
+                        var teacherInfo =commResult;
+                        teacherInfo=JSON.stringify(teacherInfo);
+                        sessionStorage.setItem("teacherInfo",teacherInfo);
+                      
+                    },
+                    error:function(commResult){
+
+                    }
+                     
+                })
+            if (logintype == "Student") {
+                 $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/showStuCourseList",
                     data: JSON.stringify(username),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
@@ -82,5 +114,25 @@
                   
                     }
                 })
+             }else if (logintype == "Teacher") {
+                 $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/showTeaCourseList",
+                    data: JSON.stringify(username),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){               
+                        var courseList =commResult;
+                        courseList=JSON.stringify(courseList);
+                        sessionStorage.setItem("courseList",courseList);
+              
+                    },
+                    error:function(commResult){
+                  
+                    }
+                })
+             }
+            
+             
         })
     })

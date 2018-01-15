@@ -24,6 +24,12 @@ public class NoticeController {
         commResult=noticeService.selectAnnouncementForStudent();
         return commResult;
     }
+    @GetMapping("/teaAnnouncement")
+    public CommResult<List<Announcement>> teaNotice(){
+        CommResult<List<Announcement>> commResult = new CommResult<>();
+        commResult=noticeService.selectAnnouncementForTeacher();
+        return commResult;
+    }
     @GetMapping("/stuAllAnnouncement")
     public CommResult<PageInfo<Announcement>> stuAllNoticeOfGet(){
         CommResult<PageInfo<Announcement>> commResult = new CommResult<>();

@@ -194,4 +194,27 @@ public class NoticeServiceImpl implements NoticeService {
         }
         return commResult;
     }
+
+    @Override
+    public CommResult<List<Announcement>> selectAnnouncementForTeacher() {
+        LOGGER.info("start select announcement for teacher{}");
+        CommResult<List<Announcement>> commResult = new CommResult<>();
+        List<Announcement> announcementList =noticeDao.selectAnnouncementForTeacher();
+        if (announcementList.size()>0&&announcementList!=null){
+            commResult.setData(announcementList);
+            commResult.setResultCode(0);
+            commResult.setResultMsg("success");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for (int i=0;i<announcementList.size();i++){
+                String stringTime =format.format(announcementList.get(i).getCreateTime());
+                announcementList.get(i).setStringTime(stringTime);
+            }
+
+        }else {
+            commResult.setResultCode(1);
+            commResult.setResultMsg("暂无公告!");
+            commResult.setData(null);
+        }
+        return commResult;
+    }
 }
