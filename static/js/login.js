@@ -66,12 +66,11 @@
                 })
              $.ajax({
                     type :"post",
-                    url:"http://localhost:8081/showCourseList",
+                    url:"http://localhost:8081/showCourseListOfStudent",
                     data: JSON.stringify(username),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
-                    success:function(commResult){
-                
+                    success:function(commResult){               
                         var courseList =commResult;
                         courseList=JSON.stringify(courseList);
                         sessionStorage.setItem("courseList",courseList);

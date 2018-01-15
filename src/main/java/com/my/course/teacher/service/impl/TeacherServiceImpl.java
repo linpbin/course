@@ -41,9 +41,10 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public CommResult teaModityPw(String password) {
         CommResult commResult = new CommResult();
-        PasswordDTO passwordDTO =JacksonUtil.readValue(password,PasswordDTO.class);
         LOGGER.info("teaModityPw"+password);
-        LOGGER.info("teaModityPw"+passwordDTO);
+        PasswordDTO passwordDTO =JacksonUtil.readValue(password,PasswordDTO.class);
+
+        LOGGER.info("teaModityPwafter"+passwordDTO);
         Teacher teacher =teacherDao.selectTeacherByIdAndPassword(passwordDTO.getUserName(),passwordDTO.getOldPassword());
         if (teacher!=null){
             int result =teacherDao.updateTeacherPw(passwordDTO.getUserName(),passwordDTO.getNewPassword());

@@ -27,7 +27,7 @@ public class StudentController {
         commResult=studentService.stuModityPw(password);
         return commResult;
     }
-    @PostMapping("/showCourseList")
+    @PostMapping("/showCourseListOfStudent")
     public CommResult showCourseList(@RequestBody String username){
         CommResult commResult = new CommResult();
         commResult=studentService.selectCourseList(username);

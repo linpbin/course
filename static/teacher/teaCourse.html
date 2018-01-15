@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>Teacher Home</title>
+    <title>Teacher Notice</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="../css/theme.css">
@@ -15,39 +15,38 @@
     <script src="../bootstrap/js/jquery-3.2.1.min.js"></script>
     <script src="../bootstrap/js/bootstrap.min.js"></script>
     <script src="../js/teaNav.js"></script>
-    <script src="../js/teacher/teamain.js"></script>
+    <script src="../js/teacher/teainfo.js"></script>
     <script src="../js/teacher/teacourse.js"></script>
-</style>
 </head>
 <body>
-<!-- top bar -->
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <ul class="nav pull-right">
+    <!-- top bar -->
+    <div class="navbar">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <ul class="nav pull-right">
 
-                <li id="fat-menu" class="dropdown">
-                    <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="icon-user"></i><span id="name"></span>
-                        <i class="icon-caret-down"></i>
-                    </a>
+                    <li id="fat-menu" class="dropdown">
+                        <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="icon-user"></i><span id="name"></span>
+                            <i class="icon-caret-down"></i>
+                        </a>
 
-                    <ul class="dropdown-menu">
+                       <ul class="dropdown-menu">
                         <li class="divider"></li>
                         <li><a tabindex="-1" href="javascript:void(0)" id="layout">退出</a></li>
                     </ul>
-                </li>
+                    </li>
 
-            </ul>
-            <a class="brand" href="#"><span class="first">My</span> <span class="second">CourePlay</span></a>
+                </ul>
+                <a class="brand" href="#"><span class="first">Your</span> <span class="second">Company</span></a>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container-fluid">
-    <!-- left bar -->
-    <div class="row-fluid">
-        <div class="span3">
+    <div class="container-fluid">
+        <!-- left bar -->
+        <div class="row-fluid">
+            <div class="span3">
             <div class="sidebar-nav">
                <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu0"><i class="glyphicon glyphicon-home"></i> 主页
                </div>
@@ -73,25 +72,18 @@
             </div>
         </div>
         <div class="span9">
+            <!-- notice -->
             <div class="row-fluid">
-                <div class="block">
-                    <div class="block-heading" data-toggle="collapse" data-target="#teanotice"><i class="glyphicon glyphicon-bullhorn"></i>公告</div>
-                    <div id="teanotice" class="block-body collapse in"></div>
-                </div>
-            </div>
-            <div class="row-fluid">
-                <div class="block span6">
-                    <div class="block-heading" data-toggle="collapse" data-target="#teainfo"><i class="glyphicon glyphicon-user"></i>基本信息</div>
-                    <div id="teainfo" class="block-body collapse in"></div>
-                </div>
-                <div class="block span6">
-                    <div class="block-heading" data-toggle="collapse" data-target="#teacourse"><i class="glyphicon glyphicon-book"></i>课程列表</div>
-                    <div id="teacourse" class="block-body collapse in"></div>
-                </div>
+              <div class="block">
+                <div class="block-heading" data-toggle="collapse" data-target="#teacourse"><i class="glyphicon glyphicon-bullhorn"></i>课程列表</div>
+                <div id="teacourse" class="block-body collapse in"></div>
             </div>
         </div>
+
     </div>
+</div>
 <!-- end -->
+
 </div>
 </body>
 </html>

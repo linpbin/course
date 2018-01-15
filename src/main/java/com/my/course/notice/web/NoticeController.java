@@ -42,6 +42,12 @@ public class NoticeController {
         commResult=noticeService.selectAllAnnouncementForStudent(pageParams);
         return commResult;
     }
+    @PostMapping("/teaAllAnnouncement")
+    public CommResult<PageInfo<Announcement>> teaAllNoticeOfPost(@RequestBody String pageParams){
+        CommResult<PageInfo<Announcement>> commResult = new CommResult<>();
+        commResult=noticeService.selectAllAnnouncementForTeacher(pageParams);
+        return commResult;
+    }
     @PostMapping("/stuAllCourseNotice")
     public CommResult stuAllCourseNotice(@RequestBody String pageparam){
         CommResult<PageInfo<Notice>> commResult = new CommResult<>();

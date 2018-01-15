@@ -19,7 +19,7 @@ public interface TeacherDao {
     @Select("select * from teacher where id=#{userName} and teacher_password=#{oldPassword}")
     Teacher selectTeacherByIdAndPassword(@Param("userName") Integer userName, @Param("oldPassword") String oldPassword);
     @Update("update teacher set teacher_password=#{newPassword} where id=#{userName}")
-    int updateTeacherPw(Integer userName, String newPassword);
+    int updateTeacherPw(@Param("userName") Integer userName,@Param("newPassword") String newPassword);
     @Select("select c.* from course c inner join teacher_course tc on tc.course_id=c.id where tc.teacher_id=#{userId}")
     List<Course> selectCourseListByTeacherId(@Param("userId") Integer userId);
 }

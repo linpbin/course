@@ -21,4 +21,5 @@ public interface NoticeService {
     CommResult<PageInfo<Notice>> selectAllCourseNotice(String pageparam);
 
     CommResult<PageInfo<Announcement>> selectAllAnnouncementForTeacher();
+    CommResult<PageInfo<Announcement>> selectAllAnnouncementForTeacher(String pageParams);
 }

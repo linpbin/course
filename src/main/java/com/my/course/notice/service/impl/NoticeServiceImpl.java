@@ -165,4 +165,33 @@ public class NoticeServiceImpl implements NoticeService {
         }
         return commResult;
     }
+
+    @Override
+    public CommResult<PageInfo<Announcement>> selectAllAnnouncementForTeacher(String pageParams) {
+        LOGGER.info("start select announcement for teacher{}");
+        PageDTO pageDTO = JacksonUtil.readValue(pageParams,PageDTO.class);
+        if (pageDTO.getPageSize()==null){
+            pageDTO.setPageSize(5);
+        }
+        LOGGER.info("pageDto{}"+pageDTO.getPageNo()+" "+pageDTO.getPageSize());
+        CommResult<PageInfo<Announcement>> commResult = new CommResult<>();
+        PageHelper.startPage(pageDTO.getPageNo(),pageDTO.getPageSize());
+        List<Announcement> announcementList =noticeDao.selectAllAnnouncementForTeacher();
+        PageInfo<Announcement> pageInfo = new PageInfo<>(announcementList);
+        if (announcementList.size()>0&&announcementList!=null){
+            commResult.setData(pageInfo);
+            commResult.setResultCode(0);
+            commResult.setResultMsg("success");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for (int i=0;i<announcementList.size();i++){
+                String stringTime =format.format(announcementList.get(i).getCreateTime());
+                announcementList.get(i).setStringTime(stringTime);
+            }
+        }else {
+            commResult.setResultCode(1);
+            commResult.setResultMsg("暂无公告!");
+            commResult.setData(null);
+        }
+        return commResult;
+    }
 }
