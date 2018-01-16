@@ -1,7 +1,7 @@
  $(function () {
             // home nav
             $("#main").click(function(){
-               window.location.href='stucourseHome.html';
+               window.location.href='teacourseHome.html';
            })
             
             //notice nav
@@ -25,12 +25,18 @@
                         var coursenotice=commResult;
                         coursenotice=JSON.stringify(coursenotice);
                        sessionStorage.setItem("coursenotice",coursenotice);
-                       window.location.href="stuCourseNotice.html";
+                       window.location.href="teanotice.html";
                     },
                     error:function (commResult) {
-                       window.location.href="stucourseHome.html"
+                       window.location.href="teacourseHome.html"
                     }
                 })
+            })
+
+             var $releasenotice = $("#releasenotice");
+         
+            $releasenotice.bind("click",function () {
+               window.location.href="teareleasenotice.html";
             })
             // course info
             var $courseinfo =$("#courseinfo");
@@ -47,10 +53,10 @@
                         var courseinfo=commResult;
                         courseinfo=JSON.stringify(courseinfo);
                         sessionStorage.setItem("courseinfo",courseinfo);
-                        window.location.href="stuCourseInfo.html";
+                        window.location.href="teaCourseInfo.html";
                     },
                     error:function(commResult){
-                        window.location.href="stucourseHome.html"
+                        window.location.href="teacourseHome.html"
                     }
                 })
             })

@@ -3,14 +3,12 @@ package com.my.course.notice.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.my.course.exception.BusinessRuntimeException;
-import com.my.course.model.Announcement;
-import com.my.course.model.CommResult;
-import com.my.course.model.Notice;
-import com.my.course.model.PageDTO;
+import com.my.course.model.*;
 import com.my.course.notice.dao.NoticeDao;
 import com.my.course.notice.service.NoticeService;
 import com.my.course.util.JacksonUtil;
 import com.my.course.util.Page;
+import org.apache.ibatis.jdbc.Null;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -216,5 +214,37 @@ public class NoticeServiceImpl implements NoticeService {
             commResult.setData(null);
         }
         return commResult;
+    }
+
+    @Override
+    public CommResult insertNotice(String pageparam) {
+        CommResult commResult = new CommResult();
+        LOGGER.info("notice param "+pageparam);
+        NoticeDTO noticeDTO = JacksonUtil.readValue(pageparam,NoticeDTO.class);
+        LOGGER.info("noticeDTO{}",noticeDTO.getContext());
+        Notice notice = new Notice();
+        notice.setCreateTime(new Date());
+        notice.setContext(noticeDTO.getContext());
+        System.out.println(noticeDTO.getContext());
+        int result=noticeDao.insertNotice(notice);
+        if (result>0){
+            int result0=noticeDao.insertNoticeCourse(Integer.parseInt(noticeDTO.getCourseId()),notice.getId());
+            if (result0!=0){
+                commResult.setData(null);
+                commResult.setResultCode(0);
+                commResult.setResultMsg("success");
+                return commResult;
+            }else {
+                commResult.setData(null);
+                commResult.setResultMsg("failure");
+                commResult.setResultCode(1);
+                return commResult;
+            }
+        }else {
+            commResult.setData(null);
+            commResult.setResultMsg("failure");
+            commResult.setResultCode(1);
+            return commResult;
+        }
     }
 }

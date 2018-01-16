@@ -1,7 +1,7 @@
  $(function () {
-  var studentname = sessionStorage.getItem("student");
-  studentname = JSON.parse(studentname);
-  $("#name").html(studentname.studentName);
+  var teachername = sessionStorage.getItem("teacher");
+  JSON.parse(teachername);
+  $("#name").html(teachername.teacherName);
 
   var coursenoticeList =sessionStorage.getItem("coursenotice");
   coursenoticeList=JSON.parse(coursenoticeList);
@@ -91,10 +91,10 @@ $("#coursenotice").html(list);
       var coursenotice = commResult;
       coursenotice = JSON.stringify(coursenotice);
       sessionStorage.setItem("coursenotice",coursenotice);
-      window.location.href='stuCourseNotice.html';  
+      window.location.href='teanotice.html';  
     },
     error:function (commResult) {
-      window.location.href='stuCourseHome.html';
+      window.location.href='teaCourseHome.html';
     }
   })
 }
