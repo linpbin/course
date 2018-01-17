@@ -1,7 +1,7 @@
 $(function () {
-        var studentname = sessionStorage.getItem("student");
-        studentname = JSON.parse(studentname);
-        $("#name").html(studentname.studentName);
+        var teachername = sessionStorage.getItem("teacher");
+         JSON.parse(teachername);
+        $("#name").html(teachername.teacherName);
 
         var courseware =sessionStorage.getItem("courseware");
         courseware=JSON.parse(courseware);
@@ -12,18 +12,28 @@ $(function () {
          <tr>
          <th>课件名</th>
          <th>课件描述</th>
-         <th>课件下载</th>
+         <th>重新上传</th>
+         <th>删除</th>
          </tr>`
          for(var i=0;i<coursewares.length;i++){
             list+=`
-            <tr>
+           <tr>
             <td >
             ${coursewares[i].coursewareName}
             </td>
             <td >
             ${coursewares[i].describes}
+            </td>
+            <td>
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="file">File input</label>
+                  <input type="file" id="file">
+                </div>
+                <a href="javascript:void(0)" class="btn btn-default" onclick="uploadcourseware(${coursewares[i].id})">上传</a>
+              </form>
             </td>          
-            <td><a href="javascript:void(0)" onclick="downloadcourseware(${coursewares[i].id})">下载</a></td>
+            <td><a href="javascript:void(0)" onclick="deletecourseware(${coursewares[i].id})">删除</a></td>
             </tr>
             `
           }
@@ -75,18 +85,46 @@ list+=`<input id="page" type="hidden">`
        $("#coursewares").html(list);
    }
 })
-function downloadcourseware(id){
+function deletecourseware(id){
   $.ajax({
         type :"post",
-        url:"http://localhost:8081/downloadCourseware",
+        url:"http://localhost:8081/deleteCourseware",
         data: JSON.stringify(id),
         contentType : "application/json;charset=utf-8",
         dataType:"json",
         success:function(commResult){
-           
+           if (commResult.resultCode == 0) {
+              alert("删除成功!!!");
+              var courseid = sessionStorage.getItem("courseid");
+            courseid = JSON.parse(courseid);
+              var pageparam = {
+    "pageNo":"1",
+    "pageSize":"5",
+    "courseId":courseid
+  }
+               $.ajax({
+    type : "post",
+    url : "http://localhost:8081/selectCourseware",
+    dataType:"json",
+    data:JSON.stringify(pageparam),
+    contentType : "application/json;charset=utf-8",
+    dataType:"json",
+    success:function (commResult) {
+      var courseware = commResult;
+      courseware = JSON.stringify(courseware);
+      sessionStorage.setItem("courseware",courseware);
+      window.location.href='teaCourseware.html';  
+    },
+    error:function (commResult) {
+      window.location.href='teaCourseHome.html';
+    }
+  })
+           }else{
+              alert("删除失败！！");
+           }
         },
         error:function(commResult){
-            alert("下载失败！");
+            alert("删除失败！");
         }
     })
 
@@ -110,10 +148,10 @@ function downloadcourseware(id){
       var courseware = commResult;
       courseware = JSON.stringify(courseware);
       sessionStorage.setItem("courseware",courseware);
-      window.location.href='stuCourseware.html';  
+      window.location.href='teaCourseware.html';  
     },
     error:function (commResult) {
-      window.location.href='stuCourseHome.html';
+      window.location.href='teaCourseHome.html';
     }
   })
 }

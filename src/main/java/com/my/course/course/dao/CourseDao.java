@@ -29,4 +29,6 @@ public interface CourseDao {
     //根据课程Id查询作业列表
     @Select("select * from teacher_task where course_id=#{courseId}")
     List<TeacherTask> selectCourseTask(@Param("courseId") Integer id);
+    @Select("select * from student s inner join student_clazz sc on sc.student_id=s.id inner join clazz_course cc on cc.clazz_id=sc.clazz_id where cc.course_id=#{courseId}")
+    List<StudentDTO> selectStudentListByCourseId(Integer courseId);
 }

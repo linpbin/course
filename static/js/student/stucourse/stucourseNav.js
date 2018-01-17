@@ -81,11 +81,16 @@
             var $courseware =$("#courseware");
             var courseid = sessionStorage.getItem("courseid");
             courseid = JSON.parse(courseid);
+              var pageparam={
+                "pageNo":"1",
+                "pageSize":"5",
+                "courseId":courseid,
+            }
             $courseware.bind("click",function(){
                 $.ajax({
                     type :"post",
                     url:"http://localhost:8081/selectCourseware",
-                    data: JSON.stringify(courseid),
+                    data: JSON.stringify(pageparam),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
                     success:function(commResult){

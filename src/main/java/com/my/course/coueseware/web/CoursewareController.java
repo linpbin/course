@@ -21,4 +21,10 @@ public class CoursewareController {
         coursewareService.selectCoursewareById(id);
         return CommResult.SUCCESS;
     }
+    @PostMapping("/deleteCourseware")
+    public CommResult deleteCourseware(@RequestBody String id){
+        CommResult commResult = new CommResult();
+        commResult=coursewareService.deleteCoursewareById(id);
+        return commResult;
+    }
 }

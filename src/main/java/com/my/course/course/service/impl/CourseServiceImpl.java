@@ -1,5 +1,7 @@
 package com.my.course.course.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.my.course.course.dao.CourseDao;
 import com.my.course.course.service.CourseService;
 import com.my.course.model.*;
@@ -60,16 +62,20 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CommResult<List<Courseware>> selectCourseware(String courseId) {
-        String courseid= JacksonUtil.readValue(courseId,String.class);
-        Integer id =Integer.parseInt(courseid);
-        CommResult<List<Courseware>> commResult = new CommResult<>();
-        List<Courseware> coursewareList =courseDao.selectCourseware(id);
+    public CommResult<PageInfo<Courseware>> selectCourseware(String courseId) {
+        PageDTO pageDTO= JacksonUtil.readValue(courseId,PageDTO.class);
+        if (pageDTO.getPageSize()==null){
+            pageDTO.setPageSize(5);
+        }
+        CommResult<PageInfo<Courseware>> commResult = new CommResult<>();
+        PageHelper.startPage(pageDTO.getPageNo(),pageDTO.getPageSize());
+        List<Courseware> coursewareList =courseDao.selectCourseware(pageDTO.getCourseId());
+        PageInfo<Courseware> pageInfo = new PageInfo<>(coursewareList);
         LOGGER.info("select all courseware"+coursewareList);
         if (coursewareList!=null&&coursewareList.size()>0){
             commResult.setResultCode(0);
             commResult.setResultMsg("success");
-            commResult.setData(coursewareList);
+            commResult.setData(pageInfo);
         }else {
             commResult.setResultCode(1);
             commResult.setResultMsg("暂无课件！");
@@ -95,5 +101,28 @@ public class CourseServiceImpl implements CourseService {
             commResult.setData(null);
         }
         return commResult;
+    }
+
+    @Override
+    public CommResult<PageInfo<StudentDTO>> selectStudentListByCourseId(String pageparam) {
+        PageDTO pageDTO = JacksonUtil.readValue(pageparam,PageDTO.class);
+        if (pageDTO.getPageSize()==null){
+            pageDTO.setPageSize(10);
+        }
+        CommResult<PageInfo<StudentDTO>> commResult = new CommResult<>();
+        PageHelper.startPage(pageDTO.getPageNo(),pageDTO.getPageSize());
+        List<StudentDTO> studentList =courseDao.selectStudentListByCourseId(pageDTO.getCourseId());
+        PageInfo<StudentDTO> pageInfo = new PageInfo<>(studentList);
+        LOGGER.info("studentlist course {}"+pageInfo);
+        if (studentList.size()>0 && studentList!=null){
+            commResult.setResultCode(0);
+            commResult.setResultMsg("success");
+            commResult.setData(pageInfo);
+        }else {
+            commResult.setResultCode(1);
+            commResult.setResultMsg("failure");
+            commResult.setData(null);
+        }
+        return  commResult;
     }
 }

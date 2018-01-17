@@ -1,5 +1,6 @@
 package com.my.course.course.web;
 
+import com.github.pagehelper.PageInfo;
 import com.my.course.course.service.CourseService;
 import com.my.course.model.*;
 import org.slf4j.Logger;
@@ -32,9 +33,9 @@ public class CourseController {
         return commResult;
     }
     @PostMapping("/selectCourseware")
-    public CommResult selectCourseware(@RequestBody String courseId){
-        CommResult<List<Courseware>> commResult = new CommResult<>();
-        commResult=courseService.selectCourseware(courseId);
+    public CommResult selectCourseware(@RequestBody String pageparam){
+        CommResult<PageInfo<Courseware>> commResult = new CommResult<>();
+        commResult=courseService.selectCourseware(pageparam);
         return commResult;
     }
     @PostMapping("/selectCoursetask")
@@ -42,6 +43,12 @@ public class CourseController {
         CommResult<List<TeacherTask>> commResult = new CommResult<>();
         commResult=courseService.selectCoursetask(courseId);
         return commResult;
+    }
+    @PostMapping("/courseStudents")
+    public CommResult courseStudents(@RequestBody String pageparam){
+        CommResult<PageInfo<StudentDTO>> commResult = new CommResult<>();
+        commResult=courseService.selectStudentListByCourseId(pageparam);
+        return  commResult;
     }
 
 

@@ -61,47 +61,58 @@
                 })
             })
            
-            //course teacher
-            var $courseteacher =$("#courseteacher");
+            //course studentes
+            var $coursestudent =$("#coursestudent");
             var courseid = sessionStorage.getItem("courseid");
             courseid = JSON.parse(courseid);
-            $courseteacher.bind("click",function(){
+           
+            $coursestudent.bind("click",function(){
+                 var pageparam={
+                "pageNo":"1",
+                "pageSize":"10",
+                "courseId":courseid,
+            }
                 $.ajax({
                     type :"post",
-                    url:"http://localhost:8081/classTeacher",
-                    data: JSON.stringify(courseid),
+                    url:"http://localhost:8081/courseStudents",
+                    data: JSON.stringify(pageparam),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
                     success:function(commResult){
-                       var courseteacherinfo=commResult;
-                        courseteacherinfo=JSON.stringify(courseteacherinfo);
-                        sessionStorage.setItem("courseteacherinfo",courseteacherinfo);
-                        window.location.href="stuCourseTeacher.html";
+                       var coursestudentlist=commResult;
+                        coursestudentlist=JSON.stringify(coursestudentlist);
+                        sessionStorage.setItem("coursestudentlist",coursestudentlist);
+                        window.location.href="teastudentlist.html";
                     },
                     error:function(commResult){
-                         window.location.href="stucourseHome.html"
+                         window.location.href="teaCourseHome.html"
                     }
                 })
             })
             //courseware
-            var $courseware =$("#courseware");
+          var $courseware =$("#courseware");
             var courseid = sessionStorage.getItem("courseid");
             courseid = JSON.parse(courseid);
+              var pageparam={
+                "pageNo":"1",
+                "pageSize":"5",
+                "courseId":courseid,
+            }
             $courseware.bind("click",function(){
                 $.ajax({
                     type :"post",
                     url:"http://localhost:8081/selectCourseware",
-                    data: JSON.stringify(courseid),
+                    data: JSON.stringify(pageparam),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
                     success:function(commResult){
                        var courseware=commResult;
                         courseware=JSON.stringify(courseware);
                         sessionStorage.setItem("courseware",courseware);
-                        window.location.href="stuCourseware.html";
+                        window.location.href="teaCourseware.html";
                     },
                     error:function(commResult){
-                         window.location.href="stucourseHome.html"
+                         window.location.href="teacourseHome.html"
                     }
                 })
             })
