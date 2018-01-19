@@ -7,11 +7,16 @@ import com.my.course.model.CommResult;
 import com.my.course.model.Courseware;
 import com.my.course.util.DownloadFile;
 import com.my.course.util.JacksonUtil;
+import com.my.course.util.UploadFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 
 
@@ -65,6 +70,34 @@ public class CoursewareServiceImpl implements CoursewareService{
             commResult.setResultCode(0);
             commResult.setResultMsg("success");
         }
+        return  commResult;
+    }
+
+    @Override
+    public CommResult reUpdateCourseware(String coursewareId, MultipartFile file){
+        CommResult commResult = new CommResult();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String realPath=request.getSession().getServletContext().getRealPath("/file");
+        System.out.println(realPath);
+            File file1 = UploadFile.generateFile(realPath,file);
+            System.out.println(file1);
+            if (file1!=null){
+                int result = coursewareDao.updateFileAddress(file1.getAbsolutePath(),Integer.parseInt(coursewareId));
+                if (result!=0) {
+                    commResult.setData(null);
+                    commResult.setResultMsg("success");
+                    commResult.setResultCode(0);
+                }else {
+                    commResult.setData(null);
+                    commResult.setResultCode(1);
+                    commResult.setResultMsg("文件路径保存失败!");
+                }
+            }else {
+                System.out.println(file1);
+                commResult.setData(null);
+                commResult.setResultCode(1);
+                commResult.setResultMsg("文件保存失败!");
+            }
         return  commResult;
     }
 }

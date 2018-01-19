@@ -25,12 +25,17 @@ $(function () {
             ${coursewares[i].describes}
             </td>
             <td>
-              <form class="form-inline">
+              <form class="form-inline" id="form-file`
+              list+=i
+              list+=`" entype="multipart/form-data">
                 <div class="form-group">
                   <label for="file">File input</label>
-                  <input type="file" id="file">
+                  <input type="file" id="file" name="file">
                 </div>
-                <a href="javascript:void(0)" class="btn btn-default" onclick="uploadcourseware(${coursewares[i].id})">上传</a>
+                <input type="hidden" name="coursewareId" value="${coursewares[i].id}"/>
+                <button type="button" class="btn btn-default" onclick="uploadcourseware(`
+                list+=i
+                list+=`)">上传</a>
               </form>
             </td>          
             <td><a href="javascript:void(0)" onclick="deletecourseware(${coursewares[i].id})">删除</a></td>
@@ -86,6 +91,7 @@ list+=`<input id="page" type="hidden">`
    }
 })
 function deletecourseware(id){
+  console.log(id);
   $.ajax({
         type :"post",
         url:"http://localhost:8081/deleteCourseware",
@@ -156,3 +162,19 @@ function deletecourseware(id){
   })
 }
 
+function uploadcourseware(i){
+  var formData=new FormData($("#form-file"+i)[0]);
+  $.ajax({
+    url: "http://localhost:8081/reupdateCourseware",
+    type:"post",
+    data:formData,
+    contentType:false,
+    processData:false,
+    success:function(commResult){
+
+    },
+    error:function(commResult){
+
+    }
+  })
+}
