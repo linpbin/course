@@ -1,7 +1,56 @@
 $(function(){
        var studentname = sessionStorage.getItem("student");
        studentname = JSON.parse(studentname);
-        var userId = studentname.id;
+       var username=studentname.studentName;
+       var userId = studentname.id;
+        $.ajax({
+                    type : "get",
+                    url : "http://localhost:8081/stuAnnouncement",
+                    dataType:"json",
+                    success:function (commResult) {
+                        var announcementList = commResult;
+                        announcementList = JSON.stringify(announcementList);
+                        sessionStorage.setItem("announcementList",announcementList);
+          
+                    },
+                    error:function (commResult) {
+                       
+                    }
+                });
+        $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/studentInfo",
+                    data: JSON.stringify(userId),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){
+                        var studnetInfo =commResult;
+                        studnetInfo=JSON.stringify(studnetInfo);
+                        sessionStorage.setItem("studnetInfo",studnetInfo);
+                      
+                    },
+                    error:function(commResult){
+
+                    }
+                     
+                })
+         $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/showStuCourseList",
+                    data: JSON.stringify(userId),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){               
+                        var courseList =commResult;
+                        courseList=JSON.stringify(courseList);
+                        sessionStorage.setItem("courseList",courseList);
+              
+                    },
+                    error:function(commResult){
+                  
+                    }
+                })
+        
        $("#name").html(studentname.studentName);
        var announcementList =sessionStorage.getItem("announcementList");
         announcementList=JSON.parse(announcementList);

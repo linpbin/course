@@ -14,6 +14,7 @@ $(function () {
          <th>课件描述</th>
          <th>课件下载</th>
          </tr>`
+
          for(var i=0;i<coursewares.length;i++){
             list+=`
             <tr>
@@ -23,7 +24,13 @@ $(function () {
             <td >
             ${coursewares[i].describes}
             </td>          
-            <td><a href="javascript:void(0)" onclick="downloadcourseware(${coursewares[i].id})">下载</a></td>
+            <td>
+            <form action="http://localhost:8081/downloadCourseware" method="post">
+              <input type="hidden" name="download" value="${coursewares[i].id}"/>
+              <input type="submit" value="下载">
+            </form>
+            
+            </td>
             </tr>
             `
           }
@@ -76,6 +83,8 @@ list+=`<input id="page" type="hidden">`
    }
 })
 function downloadcourseware(id){
+  $download = $("#download");
+  $download.bind()
   $.ajax({
         type :"post",
         url:"http://localhost:8081/downloadCourseware",

@@ -121,23 +121,11 @@
             var courseid = sessionStorage.getItem("courseid");
             courseid = JSON.parse(courseid);
             $coursetask.bind("click",function(){
-                $.ajax({
-                    type :"post",
-                    url:"http://localhost:8081/selectCoursetask",
-                    data: JSON.stringify(courseid),
-                    contentType : "application/json;charset=utf-8",
-                    dataType:"json",
-                    success:function(commResult){
-                        var coursetask=commResult;
-                        coursetask=JSON.stringify(coursetask);
-                        sessionStorage.setItem("coursetask",coursetask);
-                        window.location.href="stuCourseTask.html";
-                    },
-                    error:function(commResult){
-                         window.location.href="stucourseHome.html"
-                    }
-                })
+                window.location.href="stuCourseTask.html";
             })
+
+            //release home work
+            
 
             var $layout=$("#layout");
             $layout.bind("click",function(){

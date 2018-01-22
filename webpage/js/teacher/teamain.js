@@ -1,7 +1,55 @@
 $(function(){
+
+               $.ajax({
+                    type : "get",
+                    url : "http://localhost:8081/teaAnnouncement",
+                    dataType:"json",
+                    success:function (commResult) {
+                        var announcementList = commResult;
+                        announcementList = JSON.stringify(announcementList);
+                        sessionStorage.setItem("announcementList",announcementList);
+          
+                    },
+                    error:function (commResult) {
+                       
+                    }
+                });
        var teachername = sessionStorage.getItem("teacher");
        teachername = JSON.parse(teachername);
         var userId = teachername.id;
+          $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/teacherInfo",
+                    data: JSON.stringify(userId),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){
+                        var teacherInfo =commResult;
+                        teacherInfo=JSON.stringify(teacherInfo);
+                        sessionStorage.setItem("teacherInfo",teacherInfo);
+                      
+                    },
+                    error:function(commResult){
+
+                    }
+                     
+                })
+           $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/showTeaCourseList",
+                    data: JSON.stringify(userId),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){               
+                        var courseList =commResult;
+                        courseList=JSON.stringify(courseList);
+                        sessionStorage.setItem("courseList",courseList);
+              
+                    },
+                    error:function(commResult){
+                  
+                    }
+                })
        $("#name").html(teachername.teacherName);
        var announcementList =sessionStorage.getItem("announcementList");
         announcementList=JSON.parse(announcementList);

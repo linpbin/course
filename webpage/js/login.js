@@ -35,7 +35,7 @@
                    window.location.href="main.html";
                 }
             });
-             $.ajax({
+            $.ajax({
                     type : "get",
                     url : "http://localhost:8081/stuAnnouncement",
                     dataType:"json",
@@ -49,6 +49,10 @@
                        
                     }
                 });
+
+        
+
+           
                $.ajax({
                     type : "get",
                     url : "http://localhost:8081/teaAnnouncement",

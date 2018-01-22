@@ -171,10 +171,14 @@ function uploadcourseware(i){
     contentType:false,
     processData:false,
     success:function(commResult){
-
+      if (commResult.resultCode==0) {
+        alert("上传成功！！！")
+      }else{
+        alert(commResult.resultMsg)
+      }
     },
     error:function(commResult){
-
+      alert("上传失败！！！")
     }
   })
 }

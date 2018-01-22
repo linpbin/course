@@ -26,7 +26,7 @@ public class UploadFile {
         int month=calendar.get(Calendar.MONTH)+1;
         String filePath=realPath+year+month+"\\";
         File fileDir=new File(filePath);
-        System.out.println(fileDir);
+
         if (!fileDir.isDirectory()){
             fileDir.mkdir();
         }
@@ -37,13 +37,10 @@ public class UploadFile {
             //生成随机数
             String newFilename =year+""+month+ UUID.randomUUID()+
                     fileOriginalFilename.substring(fileOriginalFilename.lastIndexOf("."));
-            System.out.println(newFilename);
-            System.out.println(filePath+newFilename);
             //生成文件
             File newFile = new File(filePath+newFilename);
             try {
                 file.transferTo(newFile);
-                System.out.println(newFile);
             } catch (IOException e) {
                 throw new BusinessRuntimeException("文件转换失败！！！");
             }
