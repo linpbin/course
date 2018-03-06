@@ -27,7 +27,7 @@ $(function () {
             <td>
             <form action="http://localhost:8081/downloadCourseware" method="post">
               <input type="hidden" name="download" value="${coursewares[i].id}"/>
-              <input type="submit" value="下载">
+              <button class="btn" type="submit">下载</button>
             </form>
             
             </td>

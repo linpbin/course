@@ -39,9 +39,9 @@ public class CourseController {
         return commResult;
     }
     @PostMapping("/selectCoursetask")
-    public CommResult selectCoursetask(@RequestBody String courseId){
-        CommResult<List<TeacherTask>> commResult = new CommResult<>();
-        commResult=courseService.selectCoursetask(courseId);
+    public CommResult selectCoursetask(@RequestBody String pageparam){
+        CommResult<PageInfo<TeacherTask>> commResult = new CommResult<>();
+        commResult=courseService.selectCoursetask(pageparam);
         return commResult;
     }
     @PostMapping("/courseStudents")

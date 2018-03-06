@@ -18,10 +18,14 @@ $(function(){
                     contentType:false,
                     processData:false,
                     success:function (commResult) {
-                       
+                       if (commResult.resultCode==0) {
+                        alert("发布成功！！！");
+                       }else{
+                        alert(commResult.resultMsg);
+                       }
                     },
                     error:function (commResult) {
-                       window.location.href="teaCourseTask.html"
+                       alert("发布失败！！！");
                     }
          })
     })

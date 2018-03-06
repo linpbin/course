@@ -85,16 +85,21 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CommResult<List<TeacherTask>> selectCoursetask(String courseId) {
-        String courseid= JacksonUtil.readValue(courseId,String.class);
-        Integer id =Integer.parseInt(courseid);
-        CommResult<List<TeacherTask>> commResult = new CommResult<>();
-        List<TeacherTask> teacherTaskList =courseDao.selectCourseTask(id);
+    public CommResult<PageInfo<TeacherTask>> selectCoursetask(String courseId) {
+        System.out.println(courseId);
+        PageDTO pageDTO= JacksonUtil.readValue(courseId,PageDTO.class);
+        if (pageDTO.getPageSize()==null){
+            pageDTO.setPageSize(5);
+        }
+        CommResult<PageInfo<TeacherTask>> commResult = new CommResult<>();
+        PageHelper.startPage(pageDTO.getPageNo(),pageDTO.getPageSize());
+        List<TeacherTask> teacherTaskList =courseDao.selectCourseTask(pageDTO.getCourseId());
         LOGGER.info("select all course task"+teacherTaskList);
+        PageInfo<TeacherTask> pageInfo = new PageInfo<>(teacherTaskList);
         if (teacherTaskList!=null&&teacherTaskList.size()>0){
             commResult.setResultCode(0);
             commResult.setResultMsg("success");
-            commResult.setData(teacherTaskList);
+            commResult.setData(pageInfo);
         }else {
             commResult.setResultCode(1);
             commResult.setResultMsg("暂无作业！");

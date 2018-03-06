@@ -12,16 +12,17 @@ public class StudentTask {
     private Integer courseId;
     private Date uploadTime;
     private String stutaskAddress;
-    private int dr; //是否提交成功
+
+   private String taskName;
     public StudentTask() {
     }
 
-    public int getDr() {
-        return dr;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public void setDr(int dr) {
-        this.dr = dr;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
     public Integer getId() {

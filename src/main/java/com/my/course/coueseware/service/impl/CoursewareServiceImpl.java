@@ -74,9 +74,6 @@ public class CoursewareServiceImpl implements CoursewareService{
     @Override
     public CommResult reUpdateCourseware(String coursewareId, MultipartFile file){
         CommResult commResult = new CommResult();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-//        String realPath=request.getSession().getServletContext().getRealPath("/");
-
         try {
             if (file!=null){
                 String realPath =ResourceUtils.getURL("classpath:").getPath();

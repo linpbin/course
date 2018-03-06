@@ -17,7 +17,7 @@ public interface CourseService {
     //查询课件列表
     CommResult<PageInfo<Courseware>> selectCourseware(String courseId);
     //查询课程作业列表
-    CommResult<List<TeacherTask>> selectCoursetask(String courseId);
+    CommResult<PageInfo<TeacherTask>> selectCoursetask(String pageparam);
 
     CommResult<PageInfo<StudentDTO>> selectStudentListByCourseId(String pageparam);
 }

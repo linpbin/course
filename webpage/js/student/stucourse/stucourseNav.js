@@ -81,7 +81,7 @@
             var $courseware =$("#courseware");
             var courseid = sessionStorage.getItem("courseid");
             courseid = JSON.parse(courseid);
-              var pageparam={
+              var coursewares={
                 "pageNo":"1",
                 "pageSize":"5",
                 "courseId":courseid,
@@ -90,7 +90,7 @@
                 $.ajax({
                     type :"post",
                     url:"http://localhost:8081/selectCourseware",
-                    data: JSON.stringify(pageparam),
+                    data: JSON.stringify(coursewares),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
                     success:function(commResult){
@@ -108,11 +108,16 @@
             var $coursetask =$("#coursetask");
             var courseid = sessionStorage.getItem("courseid");
             courseid = JSON.parse(courseid);
+             var courseTasks={
+                "pageNo":"1",
+                "pageSize":"5",
+                "courseId":courseid,
+            }
             $coursetask.bind("click",function(){
                 $.ajax({
                     type :"post",
                     url:"http://localhost:8081/selectCoursetask",
-                    data: JSON.stringify(courseid),
+                    data: JSON.stringify(courseTasks),
                     contentType : "application/json;charset=utf-8",
                     dataType:"json",
                     success:function(commResult){
@@ -120,6 +125,36 @@
                         coursetask=JSON.stringify(coursetask);
                         sessionStorage.setItem("coursetask",coursetask);
                         window.location.href="stuCourseTask.html";
+                    },
+                    error:function(commResult){
+                         window.location.href="stucourseHome.html"
+                    }
+                })
+            })
+            //task info 
+             var $taskinfo =$("#taskinfo");
+            var student = sessionStorage.getItem("student");
+            student = JSON.parse(student);
+            var courseid = sessionStorage.getItem("courseid");
+            courseid = JSON.parse(courseid);
+             var taskinfos={
+                "pageNo":"1",
+                "pageSize":"5",
+                "studentId":student.id,
+                "courseId":courseid,
+            }
+            $taskinfo.bind("click",function(){
+                $.ajax({
+                    type :"post",
+                    url:"http://localhost:8081/selectCoursetaskinfo",
+                    data: JSON.stringify(taskinfos),
+                    contentType : "application/json;charset=utf-8",
+                    dataType:"json",
+                    success:function(commResult){
+                        var coursetaskinfo=commResult;
+                        coursetaskinfo=JSON.stringify(coursetaskinfo);
+                        sessionStorage.setItem("coursetaskinfo",coursetaskinfo);
+                        window.location.href="stuCourseTaskInfo.html";
                     },
                     error:function(commResult){
                          window.location.href="stucourseHome.html"
