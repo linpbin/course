@@ -10,6 +10,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
@@ -151,7 +153,14 @@ public class ClockServiceImpl implements ClockService {
         SignRecord signRecord = JacksonUtil.readValue(params,SignRecord.class);
         if (signRecord.getSignTime()!=null&&signRecord.getStudentId()!=null&&signRecord.getStudentName()!=null&&signRecord.getStudentClazz()!=null&&signRecord.getSignruleId()!=null){
             SignRule signRule = clockDao.getSignRuleById(signRecord.getSignruleId());
-            int va = signRecord.getSignTime().compareTo(signRule.getEndTime());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            int va = 0;
+            try {
+                va = signRecord.getSignTime().compareTo(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(signRule.getEndTime()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             if (va>1){
                 commResult.setData(null);
                 commResult.setResultMsg("已超过截止时间");
