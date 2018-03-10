@@ -19,7 +19,6 @@ public class CourseController {
     private static final Logger LOGGER = LoggerFactory.getLogger(CourseController.class);
     @Autowired
     private CourseService courseService;
-
     @PostMapping("/courseInfo")
     public CommResult courseInfo(@RequestBody String courseId){
         CommResult<Course> commResult = new CommResult<>();

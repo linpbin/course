@@ -4,14 +4,17 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.my.course.clock.dao.ClockDao;
 import com.my.course.clock.service.ClockService;
+import com.my.course.exception.BusinessRuntimeException;
 import com.my.course.model.*;
 import com.my.course.util.JacksonUtil;
 import org.apache.ibatis.annotations.Param;
+import org.apache.poi.hssf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,6 +26,20 @@ public class ClockServiceImpl implements ClockService {
         CommResult commResult = new CommResult();
         SignRule signRule = JacksonUtil.readValue(params,SignRule.class);
         if (signRule.getCourseId()!=null && signRule.getStartTime()!=null&&signRule.getEndTime()!=null){
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            try {
+                Date start = format.parse(signRule.getStartTime());
+                Date end = format.parse(signRule.getEndTime());
+                int va = start.compareTo(end);
+                if (va>0){
+                    commResult.setData(null);
+                    commResult.setResultMsg("开始日期必须比结束日期小");
+                    commResult.setResultCode(1);
+                    return commResult;
+                }
+            } catch (ParseException e) {
+                throw new BusinessRuntimeException("日期转换失败");
+            }
             int result = clockDao.insertSignRule(signRule);
             if(result!=0){
                 commResult.setData(signRule);
@@ -52,7 +69,7 @@ public class ClockServiceImpl implements ClockService {
             signRuleDTO.setPageSize(5);
         }
         PageHelper.startPage(signRuleDTO.getPageNo(),signRuleDTO.getPageSize());
-        List<SignRule> signRuleList = clockDao.getAllSignRule();
+        List<SignRule> signRuleList = clockDao.getAllSignRule(signRuleDTO.getCourseId());
         PageInfo<SignRule> pageInfo = new PageInfo<>(signRuleList);
         if (signRuleList!=null && signRuleList.size()>0){
             commResult.setData(pageInfo);
@@ -204,4 +221,6 @@ public class ClockServiceImpl implements ClockService {
             return commResult;
         }
     }
+
+
 }

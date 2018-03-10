@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>Course Home</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="../../css/theme.css">
+  <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/topbar.css" rel="stylesheet">
+  <link href="../../css/student/stubody.css" rel="stylesheet">
+  <script src="../../bootstrap/js/jquery-3.2.1.min.js"></script>
+  <script src="../../bootstrap/js/bootstrap.min.js"></script>
+  <script src="../../js/teacher/teacourse/teacourseNav.js"></script>
+  <script src="../../js/teacher/teacourse/teacourseware.js"></script>
+
+
+</style>
+</head>
+<body>
+  <!-- top bar -->
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <ul class="nav pull-right">
+
+          <li id="fat-menu" class="dropdown">
+            <a href="#" id="drop3" role="button" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="icon-user"></i><span id="name"></span>
+              <i class="icon-caret-down"></i>
+            </a>
+
+            <ul class="dropdown-menu">
+              <li class="divider"></li>
+              <li><a tabindex="-1" href="#">Logout</a></li>
+            </ul>
+          </li>
+
+        </ul>
+        <a class="brand" href="#"><span class="first">My</span> <span class="second">CourePlay</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <!-- left bar -->
+     <div class="row-fluid">
+      <div class="span3">
+        <div class="sidebar-nav">
+         <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu0"><i class="icon-dashboard"></i> 主页
+         </div>
+         <ul id="dashboard-menu0" class="nav nav-list collapse in">
+          <li><a href="javascript:void(0)" id="main">主页</a></li>
+        </ul>
+        <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu1"><i class="icon-dashboard"></i>发布通知
+        </div>
+        <ul id="dashboard-menu1" class="nav nav-list collapse in">
+          <li><a href="javascript:void(0)" id="notice">已发布通知</a></li>
+          <li><a href="javascript:void(0)" id="releasenotice">发布通知</a></li>
+        </ul>
+        <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu2"><i class="icon-dashboard"></i>课程信息
+        </div>
+        <ul id="dashboard-menu2" class="nav nav-list collapse in">
+          <li ><a href="javascript:void(0)" id="courseinfo">课程介绍</a></li>
+          <li ><a href="javascript:void(0)" id="courseware">教学课件</a></li>
+          <li><a href="javascript:void(0)" id="coursestudent">学生列表</a></li>
+        </ul>
+        <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu3"><i class="icon-dashboard"></i>课程作业
+        </div>
+        <ul id="dashboard-menu3" class="nav nav-list collapse in">
+          <li ><a href="javascript:void(0)" id="coursetask">发布作业</a></li>
+        </ul>
+         <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu5"><i class="icon-dashboard"></i>考勤管理
+        </div>
+        <ul id="dashboard-menu5" class="nav nav-list collapse in">
+          <li ><a href="javascript:void(0)" id="signrule">发起考勤</a></li>
+          <li ><a href="javascript:void(0)" id="signrecoed">考勤详情</a></li>
+        </ul>
+        <div class="nav-header" data-toggle="collapse" data-target="#dashboard-menu4"><i class="icon-dashboard"></i>讨论区
+        </div>
+        <ul id="dashboard-menu4" class="nav nav-list collapse in">
+          <li ><a href="javascript:void(0)" id="leavemessage">讨论区</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="span9">
+       <div class="row-fluid">
+        <div class="block">
+          <div class="block-heading" data-toggle="collapse" data-target="#coursewares">课件列表</div>
+          <div id="coursewares" class="block-body collapse in">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end -->
+</div>
+</body>
+</html>

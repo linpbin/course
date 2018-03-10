@@ -8,6 +8,8 @@ public class SignRule {
     private String endTime;
     private Integer courseId;
 
+
+
     public Integer getId() {
         return id;
     }
@@ -38,5 +40,14 @@ public class SignRule {
 
     public void setCourseId(Integer courseId) {
         this.courseId = courseId;
+    }
+
+    @Override
+    public String toString() {
+        return "SignRule{" +
+                "startTime='" + startTime + '\'' +
+                ", endTime='" + endTime + '\'' +
+                ", courseId=" + courseId +
+                '}';
     }
 }

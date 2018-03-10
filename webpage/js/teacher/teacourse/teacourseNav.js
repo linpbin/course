@@ -33,8 +33,7 @@
                 })
             })
 
-             var $releasenotice = $("#releasenotice");
-         
+            var $releasenotice = $("#releasenotice");
             $releasenotice.bind("click",function () {
                window.location.href="teareleasenotice.html";
             })
@@ -124,8 +123,12 @@
                 window.location.href="stuCourseTask.html";
             })
 
-            //release home work
-            
+            //signrule
+            var $signrule =$("#signrule");
+            $signrule.bind("click",function(){
+                window.location.href="teasignrule.html";
+            })
+            //signrecord
 
             var $layout=$("#layout");
             $layout.bind("click",function(){
